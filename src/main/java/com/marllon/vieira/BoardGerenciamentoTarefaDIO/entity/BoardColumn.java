@@ -28,15 +28,15 @@ public class BoardColumn {
     private String name;
 
     @Column(name = "kind")
+    @Enumerated(EnumType.STRING)
     @NotBlank(message = "Campo kind da tabela board_column não pode ficar em branco")
     @NotNull(message = "Campo kind da tabela board_column não pode ser nulo!")
-    private String kind;
+    private BoardColumnKindEnum kind;
 
     @Column(name = "order_enum")
     @NotNull(message = "Campo order da tabela board_column não pode ser nulo!")
     @NotBlank(message = "Campo order da tabela board_column não pode ficar em branco")
-    @Enumerated(EnumType.STRING)
-    private BoardColumnKindEnum order;
+    private Integer order;
 
 
     //Para relacionar
