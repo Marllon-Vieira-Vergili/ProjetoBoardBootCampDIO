@@ -2,9 +2,7 @@ package com.marllon.vieira.BoardGerenciamentoTarefaDIO.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 
@@ -16,6 +14,7 @@ import java.time.OffsetDateTime;
 public class Block {
 
     @Id
+    @Setter(AccessLevel.NONE) //Não fazer setter no campo ID
     @NotNull(message = "Campo id da tabela Block não pode ser nulo")
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +38,8 @@ public class Block {
 
 
 
-    //para relacionar
+    //Muitos Block para um Card
+    @ManyToOne
+    @JoinColumn(name = "card_id") //Relacionando a card_id
     private Card card;
 }

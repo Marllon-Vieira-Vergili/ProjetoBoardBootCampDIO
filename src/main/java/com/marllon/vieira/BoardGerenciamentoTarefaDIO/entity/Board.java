@@ -2,9 +2,9 @@ package com.marllon.vieira.BoardGerenciamentoTarefaDIO.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 public class Board {
 
     @Id
+    @Setter(AccessLevel.NONE) //Não fazer setter no campo ID
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Campo id do Board não pode ser nulo")
     @Column(name = "id")
@@ -23,7 +25,12 @@ public class Board {
     @NotNull(message = "Campo name do Board não pode ser nulo")
     private String name;
 
-
-    //Para Relacionar
-    private BoardColumn boardColumn;
+    /**
+     * Relacionando uma Board, com uma lista
+     * de BoardColumn
+     *
+     * Cascade com todos os tipos de requisições, chamada com fetch atrasada(preguiçosa)
+     * */
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<BoardColumn> boardColumn;
 }
