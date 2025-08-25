@@ -15,7 +15,6 @@ public class Block {
 
     @Id
     @Setter(AccessLevel.NONE) //Não fazer setter no campo ID
-    @NotNull(message = "Campo id da tabela Block não pode ser nulo")
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,11 +27,11 @@ public class Block {
     @Column(name = "block_reason")
     private String blockReason;
 
-    @NotNull
+
     @Column(name = "unblocked_at")
     private OffsetDateTime unblockedAt;
 
-    @NotNull
+
     @Column(name = "block_unblock_reason")
     private String blockUnblockReason;
 

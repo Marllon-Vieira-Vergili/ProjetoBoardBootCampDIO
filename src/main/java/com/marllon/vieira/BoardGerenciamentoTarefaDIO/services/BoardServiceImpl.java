@@ -124,4 +124,9 @@ public interface BoardServiceImpl {
      * */
     public void unblockCard(Long cardId, String reason);
 
+    /**
+     * Método para remover uma board(quadro).
+     * @throws BoardNotFoundException se não for localizado a board pela id
+     * */
+    void deleteBoard(Long boardId);
 }

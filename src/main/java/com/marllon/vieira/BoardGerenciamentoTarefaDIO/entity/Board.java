@@ -17,7 +17,7 @@ public class Board {
     @Setter(AccessLevel.NONE) //Não fazer setter no campo ID
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Campo id do Board não pode ser nulo")
+
     @Column(name = "id")
     private Long id;
 
@@ -32,5 +32,5 @@ public class Board {
      * Cascade com todos os tipos de requisições, chamada com fetch atrasada(preguiçosa)
      * */
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<BoardColumn> boardColumn;
+    private List<BoardColumn> columns;
 }

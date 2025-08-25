@@ -27,3 +27,17 @@ Escreva um código que irá criar um board customizável para acompanhamento de 
     1 - Um card deve armazenar a data e hora em que foi colocado em uma coluna e a data e hora que foi movido pra a próxima coluna;
     2 - O código deve gerar um relatório do board selecionado com o tempo que cada tarefa demorou para ser concluída com informações do tempo que levou em cada coluna
     3 - O código dever gerar um relatório do board selecionado com o os bloqueios dos cards, com o tempo que ficaram bloqueados e com a justificativa dos bloqueios e desbloqueios.
+
+
+
+===========================================
+COMO TESTAR:
+
+1 - Faça um git clone no repositório
+2- Rode na sua IDE de preferência. (Recomendo Intellij)
+3 - Crie um banco de dados no Mysql, para teste. Recomendo deixar o nome: "boardGerTarefasDio" com o comando: "create database boardGerTarefasDio;"
+4 - Vá no arquivo application.properties, e altere o datasource.username & datasource.password de acordo com o usuário e senha que vocÊ definiu no seu mysql
+5 - Verifique se você está utilizando a versão 21 do JDK.
+6 - Vá no arquivo POM.xml e verifique se todas as dependências deste projeto estão baixadas para funcionar este repositório sem erros.
+7 - Compilar, ver se não irá dar nenhum erro relacionado a configuração do properties, ou do banco, ou dependência ausente.
+8 - Testar o sistema, e adicionar novas funcionalidades (se quiser).

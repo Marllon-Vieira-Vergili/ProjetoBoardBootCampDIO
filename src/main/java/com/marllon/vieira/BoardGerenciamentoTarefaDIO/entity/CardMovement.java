@@ -32,7 +32,6 @@ import java.time.OffsetDateTime;
 public class CardMovement {
 
     @Id
-    @NotNull(message = "Campo id da tabela Block não pode ser nulo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;

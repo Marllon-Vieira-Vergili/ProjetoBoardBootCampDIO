@@ -16,5 +16,5 @@ public interface BoardColumnRepository extends JpaRepository<BoardColumn,Long> {
     Optional<BoardColumn> findByBoardIdAndKind(Long boardId, BoardColumnKindEnum kind);
 
     //Encontrar na lista pela ordem da id do board
-    List<BoardColumn> findByBoardIdOrder(Long boardId);
+    List<BoardColumn> findByBoardIdOrderByOrderAsc(Long boardId);
 }

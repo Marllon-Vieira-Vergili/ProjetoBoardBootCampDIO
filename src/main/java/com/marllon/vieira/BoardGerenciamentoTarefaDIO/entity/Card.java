@@ -21,7 +21,7 @@ public class Card {
     @Setter(AccessLevel.NONE) //Não deixar fazer set na id (lombok)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @NotNull(message = "O campo id da tabela card não pode ser nulo")
+
     private Long id;
 
     @Column(name = "title")

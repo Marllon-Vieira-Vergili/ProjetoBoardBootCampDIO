@@ -46,17 +46,20 @@ public class BoardService implements BoardServiceImpl{
         //Persistindo o objeto no banco
         board = boardRepository.save(board);
 
+        //Criar colunas com ordem correta.
+        int orderIndex = 1;
+
         // Criar colunas obrigatórias
-        createColumn(board, columnNames.get(0), BoardColumnKindEnum.INITIAL, 1);
+        createColumn(board, columnNames.get(0), BoardColumnKindEnum.INITIAL, orderIndex++);
 
         // Criar colunas pendentes
         for (int i = 1; i < columnNames.size() - 2; i++) {
-            createColumn(board, columnNames.get(i), BoardColumnKindEnum.PENDING, i + 1);
+            createColumn(board, columnNames.get(i), BoardColumnKindEnum.PENDING, orderIndex++);
         }
 
         // Criar coluna final e de cancelamento
-        createColumn(board, columnNames.get(columnNames.size() - 2), BoardColumnKindEnum.FINAL, columnNames.size() - 1);
-        createColumn(board, columnNames.get(columnNames.size() - 1), BoardColumnKindEnum.CANCEL, columnNames.size());
+        createColumn(board, columnNames.get(columnNames.size() - 2), BoardColumnKindEnum.FINAL, orderIndex++);
+        createColumn(board, columnNames.get(columnNames.size() - 1), BoardColumnKindEnum.CANCEL, orderIndex);
 
         return board;
     }
@@ -147,9 +150,11 @@ public class BoardService implements BoardServiceImpl{
     @Override
     public List<Board> getAllBoards() {
 
-        if (boardRepository.findAll().isEmpty()){
+        /*if (boardRepository.findAll().isEmpty()){
             throw new BoardNotFoundException("Nenhuma board foi localizada");
         }
+
+         */
         return boardRepository.findAll();
     }
 
@@ -162,18 +167,24 @@ public class BoardService implements BoardServiceImpl{
     @Override
     public List<BoardColumn> getBoardColumns(Long boardId) {
 
-        if (boardColumnRepository.findByBoardIdOrder(boardId).isEmpty()){
+        /*
+        if (boardColumnRepository.findByBoardIdOrderByOrderAsc(boardId).isEmpty()){
             throw new BoardNotFoundException("Não foi encontrado nenhuma coluna com a id informada da board");
         }
-        return boardColumnRepository.findByBoardIdOrder(boardId);
+
+         */
+        return boardColumnRepository.findByBoardIdOrderByOrderAsc(boardId);
     }
 
     @Override
     public List<Card> getCardsByColumn(Long columnId) {
 
+        /*
         if (cardRepository.findByBoardColumnId(columnId).isEmpty()){
             throw new CardNotFoundException("Não foi localizado nenhum card nessa coluna");
         }
+
+         */
         return cardRepository.findByBoardColumnId(columnId);
 
     }
@@ -268,6 +279,17 @@ public class BoardService implements BoardServiceImpl{
         card.setBlocked(false);
         //Persistir as alterações e atualizar na tabela card
         cardRepository.save(card);
+    }
+
+    @Override
+    public void deleteBoard(Long boardId) {
+
+        if (boardRepository.findById(boardId).isPresent()){
+            boardRepository.deleteById(boardId);
+        }else{
+            throw new BoardNotFoundException("Board não foi encontrada para remoção");
+        }
+
     }
 
 }

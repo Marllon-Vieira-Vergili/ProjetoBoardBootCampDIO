@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class BoardColumn {
     @Setter(AccessLevel.NONE) //não deixar fazer set na id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @NotNull(message = "Campo id da tabela BoardColumn não pode ser nulo!")
+
     private Long id;
 
     @Column(name = "name")
@@ -29,20 +31,21 @@ public class BoardColumn {
 
     @Column(name = "kind")
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "Campo kind da tabela board_column não pode ficar em branco")
+
     @NotNull(message = "Campo kind da tabela board_column não pode ser nulo!")
     private BoardColumnKindEnum kind;
 
     @Column(name = "order_enum")
     @NotNull(message = "Campo order da tabela board_column não pode ser nulo!")
-    @NotBlank(message = "Campo order da tabela board_column não pode ficar em branco")
+
     private Integer order;
 
 
     //Para relacionar
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "board_id")
     private Board board;
 
-    @OneToMany
-    private Card card;
+    @OneToMany(mappedBy = "boardColumn", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Card> cards;
 }
